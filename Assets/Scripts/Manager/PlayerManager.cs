@@ -5,30 +5,32 @@ using UnityEngine;
 public class PlayerManager : SingletonMonoBehaviour<PlayerManager> {
 
     //ステータス
+    //絶対にSetter, Getterとかを使うこと
     private int life = 3;
     private int stock = 2;
     private int beetle_Power = 0;
 
-    
-    //ライフ減らす
+
+    //Reduce
     public void Reduce_Life() {
-        if (life > 0) {
-            life--;
+        life--;
+        if(life == 0) {
+            GameManager.Instance.Miss();
         }
     }
 
-    //ライフ増やす
+    public void Reduce_Stock() {
+        stock--;
+        if (stock == -1) {
+            GameManager.Instance.Game_Over();
+        }
+    }
+
+    //Add
     public void Add_Life() {
         life++;
     }
-
-
-    //ストック減らす
-    public void Reduce_Stock() {
-        stock--;
-    }
-
-    //ストック増やす
+    
     public void Add_Stock() {
         stock++;
     }
@@ -46,11 +48,21 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager> {
 
     //Setter
     public void Set_Life(int life) {
-        this.life = life;
+        if (life >= 0) {
+            this.life = life;
+        }
+        if (life == 0) {
+            GameManager.Instance.Miss();
+        }
     }
 
-    public void Set_Stock(int stock) {
-        this.stock = stock;
+    public void Set_Stock(int stock) {        
+        if (stock >= -1) {
+            this.stock = stock;
+        }
+        if (stock == -1) {
+            GameManager.Instance.Game_Over();
+        }
     }
 
 

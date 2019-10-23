@@ -8,10 +8,6 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D _rigid;
     private PlayerJump _jump;
     private PlayerTransition _transition;
-    private PlayerMissFunction _miss_Function;
-
-    //スクリプト
-    private PlayerManager player_Manager;
 
     //状態
     public bool is_Playable = true;
@@ -25,16 +21,7 @@ public class PlayerController : MonoBehaviour {
         _rigid = GetComponent<Rigidbody2D>();
         _jump = GetComponent<PlayerJump>();
         _transition = GetComponent<PlayerTransition>();
-        _miss_Function = GetComponent<PlayerMissFunction>();
     }
-
-
-    //Start
-    private void Start() {
-        //取得
-        player_Manager = PlayerManager.Instance;
-    }
-
 
 
     // Update is called once per frame
@@ -52,11 +39,6 @@ public class PlayerController : MonoBehaviour {
             Normal_Controlle();
             Ride_Beetle();            
         }
-
-        if(player_Manager.Get_Life() == 0) {
-            _miss_Function.Miss();
-        }
-        
 	}
 
 

@@ -8,14 +8,12 @@ public class PlayerFootCollision : MonoBehaviour {
     private GameObject player;
     //コンポーネント
     private PlayerController player_Controller;
-    private PlayerMissFunction player_miss_Func;
     private AudioSource landing_Sound;
 
     
     private void Start() {
         player = transform.parent.gameObject;        
         player_Controller   = player.GetComponent<PlayerController>();
-        player_miss_Func    = player.GetComponent<PlayerMissFunction>();
     }
 
     
@@ -38,7 +36,7 @@ public class PlayerFootCollision : MonoBehaviour {
         foreach(string tag_Name in TagManager.LAND_TAG_LIST) {
             if(collision.tag == tag_Name) {
                 player_Controller.is_Landing = false;
-                player_miss_Func.Set_Revive_Point(player.transform.position);
+                GameManager.Instance.Set_Revive_Point(player.transform.position);
             }
         }        
     }
