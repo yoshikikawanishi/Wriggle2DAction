@@ -19,6 +19,7 @@ public class PlayerJump : MonoBehaviour {
     public void Jump() {
         _rigid.velocity = new Vector2(_rigid.velocity.x, 320f);
         //jump_Sound.Play();
+        _controller.Change_Animation("JumpBool");
         _controller.is_Landing = false;
     }
 

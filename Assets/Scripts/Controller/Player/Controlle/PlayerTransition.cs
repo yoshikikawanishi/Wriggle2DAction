@@ -9,7 +9,7 @@ public class PlayerTransition : MonoBehaviour {
     private PlayerController _controller;
 
     //速度、加速度
-    private float MAX_SPEED = 180f;
+    private float MAX_SPEED = 170f;
     private float acc = 20f;
 
     
@@ -25,18 +25,24 @@ public class PlayerTransition : MonoBehaviour {
         acc = _controller.is_Landing ? 20f : 6f;
         //移動、加速
         if(direction == 1 && _rigid.velocity.x < MAX_SPEED) {            
-            _rigid.velocity += new Vector2(acc, 0);            
+            _rigid.velocity += new Vector2(acc, 0);
+            transform.localScale = new Vector3(1, 1, 1);
         }
         if(direction == -1 && _rigid.velocity.x > -MAX_SPEED){
-            _rigid.velocity += new Vector2(-acc, 0);            
+            _rigid.velocity += new Vector2(-acc, 0);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
-        
+        //アニメーション
+        if (_controller.is_Landing) {
+            _controller.Change_Animation("DashBool");
+        }
     }
 
     //減速
     public void Slow_Down() {
         if (_controller.is_Landing) {
-            _rigid.velocity *= new Vector2(0.4f, 1);
-        }
+            _rigid.velocity *= new Vector2(0.25f, 1);
+            _controller.Change_Animation("IdleBool");
+        }        
     }
 }

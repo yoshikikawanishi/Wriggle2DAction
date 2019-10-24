@@ -6,21 +6,34 @@ public class PlayerController : MonoBehaviour {
 
     //コンポーネント
     private Rigidbody2D _rigid;
-    private PlayerJump _jump;
+    private Animator _anim;
     private PlayerTransition _transition;
+    private PlayerJump _jump;
+    private PlayerAttack _attack;
 
     //状態
     public bool is_Playable = true;
     public bool is_Landing = true;
     public bool is_Ride_Beetle = false;
+    //攻撃の入力識別用
+    public bool start_Attack_Frame_Count = false;
+
+    private int attack_Frame_Count = 0;
+
+    private string now_Animator_Parameter = "IdleBool";
+
+    private float attack_Time = 0.5f;
+    private float attack_Interval = 0.5f;
 
 
     //Awake
     private void Awake() {
         //取得
         _rigid = GetComponent<Rigidbody2D>();
-        _jump = GetComponent<PlayerJump>();
+        _anim = GetComponent<Animator>();
         _transition = GetComponent<PlayerTransition>();
+        _jump = GetComponent<PlayerJump>();
+        _attack = GetComponent<PlayerAttack>();
     }
 
 
@@ -32,12 +45,10 @@ public class PlayerController : MonoBehaviour {
         }
 
         if (is_Ride_Beetle) {
-            Beetle_Controlle();
-            Get_Off_Beetle();       
+            Beetle_Controlle();    
         }
         else {
-            Normal_Controlle();
-            Ride_Beetle();            
+            Normal_Controlle();                   
         }
 	}
 
@@ -61,6 +72,10 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyUp(KeyCode.Z)) {
             _jump.Slow_Down();
         }
+        //近接攻撃
+        Attack();
+        //カブトムシに乗る
+        Ride_Beetle();
         //パワーの回復
 
     }
@@ -72,8 +87,33 @@ public class PlayerController : MonoBehaviour {
 
         //ショット
 
+        //カブトムシから降りる
+        Get_Off_Beetle();
         //パワーの消費
 
+    }
+
+
+    //近接攻撃
+    //注意：もし、攻撃発生までにis_Playableがfalseになっても、攻撃は続行する
+    public void Attack() {
+        //入力を受け取ったら、少しだけ待つ
+        if (Input.GetKeyDown(KeyCode.X)) {
+            start_Attack_Frame_Count = true;
+        }
+        //待ってる間に下が押されたらキック、1度も押されなかったら横攻撃
+        if (start_Attack_Frame_Count) {
+            attack_Frame_Count++;
+            if (Input.GetKey(KeyCode.DownArrow)) {
+                _attack.Kick();
+            }
+            else if (attack_Frame_Count > 7) {
+                _attack.Attack();
+            }
+            else return;
+            attack_Frame_Count = 0;
+            start_Attack_Frame_Count = false;
+        }
     }
 
 
@@ -94,7 +134,23 @@ public class PlayerController : MonoBehaviour {
 
 
     //アニメーション変更
+    //横攻撃とキックはAnyStateからのTriggerで管理
     public void Change_Animation(string next_Parameter) {
+        if(now_Animator_Parameter == next_Parameter) {
+            return;
+        }
 
+        _anim.SetBool("IdleBool", false);
+        _anim.SetBool("DashBool", false);
+        _anim.SetBool("JumpBool", false);
+
+        _anim.SetBool(next_Parameter, true);
+        now_Animator_Parameter = next_Parameter;
+    }
+
+
+    //Setter
+    public void Set_Is_Playable(bool is_Playable) {
+        this.is_Playable = is_Playable;
     }
 }

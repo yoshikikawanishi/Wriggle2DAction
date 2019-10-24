@@ -25,6 +25,7 @@ public class PlayerFootCollision : MonoBehaviour {
             }
             if (collision.tag == tag_Name) {
                 player_Controller.is_Landing = true;
+                player_Controller.Change_Animation("IdleBool");
                 //landing_Sound.Play();
             }
         }        
