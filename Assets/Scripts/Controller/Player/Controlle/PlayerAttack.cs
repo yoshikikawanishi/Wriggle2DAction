@@ -8,6 +8,8 @@ public class PlayerAttack : MonoBehaviour {
     private PlayerController _controller;
     private Animator _anim;
     private Rigidbody2D _rigid;
+    private PlayerAttackCollision attack_Collision;
+    private PlayerKickCollision kick_Collision;
 
     private bool can_Attack = true;
 
@@ -18,6 +20,8 @@ public class PlayerAttack : MonoBehaviour {
         _controller = GetComponent<PlayerController>();
         _anim = GetComponent<Animator>();
         _rigid = GetComponent<Rigidbody2D>();
+        attack_Collision = GetComponentInChildren<PlayerAttackCollision>();
+        kick_Collision = GetComponentInChildren<PlayerKickCollision>();
     }
 
 
@@ -32,8 +36,23 @@ public class PlayerAttack : MonoBehaviour {
     public IEnumerator Attack_Cor() {
         can_Attack = false;       
         _anim.SetTrigger("AttackTrigger");
-        yield return new WaitForSeconds(0.18f);        
+
+        attack_Collision.Make_Collider_Appear();
+        for(float t = 0; t < 0.18f; t += Time.deltaTime) {
+            //敵と衝突時反動
+            if (attack_Collision.Hit_Trigger()) {
+                _rigid.velocity = new Vector2(50f * -transform.localScale.x, 100f);
+                Time.timeScale = 0.6f;
+                break;
+            }
+            yield return null;
+        }
+
         can_Attack = true;
+        yield return new WaitForSeconds(0.05f);
+        Time.timeScale = 1.0f;
+        yield return new WaitForSeconds(0.05f);
+        attack_Collision.Make_Collider_Disappear();        
     }
 
 
@@ -49,8 +68,20 @@ public class PlayerAttack : MonoBehaviour {
         can_Attack = false;
         _controller.Set_Is_Playable(false);
         _anim.SetTrigger("KickTrigger");
-        _rigid.velocity = new Vector2(transform.localScale.x * 170f, -200f);
-        yield return new WaitForSeconds(0.33f);
+        _rigid.velocity = new Vector2(transform.localScale.x * 180f, -200f);
+
+        kick_Collision.Make_Collider_Appear();
+        for (float t = 0; t < 0.33f; t += Time.deltaTime) {
+            //敵と衝突時反動
+            if (kick_Collision.Hit_Trigger()) {                
+                _rigid.velocity = new Vector2(40f * -transform.localScale.x, 180f);
+                yield return new WaitForSeconds(0.15f);
+                break;
+            }
+            yield return null;
+        }
+        kick_Collision.Make_Collider_Disappear();
+
         _controller.Set_Is_Playable(true);
         can_Attack = true;
     }
