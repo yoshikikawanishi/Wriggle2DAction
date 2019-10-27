@@ -19,14 +19,16 @@ public class PlayerFootCollision : MonoBehaviour {
     
     protected void OnTriggerStay2D(Collider2D collision) {
         //着地判定
+        if (player_Controller.Get_Is_Ride_Beetle()) {
+            return;
+        }
         foreach(string tag_Name in TagManager.LAND_TAG_LIST) {
             if (player_Controller.is_Landing) {
                 break;
             }
             if (collision.tag == tag_Name) {
                 player_Controller.is_Landing = true;
-                player_Controller.Change_Animation("IdleBool");
-                //landing_Sound.Play();
+                Landing();                
             }
         }        
     }
@@ -40,6 +42,12 @@ public class PlayerFootCollision : MonoBehaviour {
                 GameManager.Instance.Set_Revive_Point(player.transform.position);
             }
         }        
+    }
+
+
+    private void Landing() {
+        player_Controller.Change_Animation("IdleBool");
+        //landing_Sound.Play();
     }
 
 }
