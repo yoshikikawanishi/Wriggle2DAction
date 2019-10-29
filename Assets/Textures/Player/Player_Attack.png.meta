@@ -124,17 +124,17 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4
-        y: 75
+        y: 78
         width: 21
         height: 27
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b2f5d31b67eb2e42b18418707b9826d
+      spriteID: 6151ff22e49e5524f82aad57f0396499
       vertices: []
       indices: 
       edges: []
@@ -143,18 +143,18 @@ TextureImporter:
       name: Player_Attack_1
       rect:
         serializedVersion: 2
-        x: 3
-        y: 40
-        width: 34
+        x: 2
+        y: 43
+        width: 35
         height: 27
       alignment: 9
-      pivot: {x: 0.3382353, y: 0.5}
+      pivot: {x: 0.35714287, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 41f521e581465ad4e9b20ebd8d055515
+      spriteID: f218f3402a43b8d48a25ec4429764db2
       vertices: []
       indices: 
       edges: []
@@ -163,9 +163,9 @@ TextureImporter:
       name: Player_Attack_2
       rect:
         serializedVersion: 2
-        x: 4
-        y: 5
-        width: 21
+        x: 6
+        y: 8
+        width: 19
         height: 29
       alignment: 9
       pivot: {x: 0.5, y: 0.46551725}
@@ -174,7 +174,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9df623edcdc572e4fbb5fdfcd3bc7718
+      spriteID: 12ab2099485f44042a3ced171c7af38d
       vertices: []
       indices: 
       edges: []
@@ -182,7 +182,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: fb628c033c654ec47b0c4cc93d56dc32
+    spriteID: bd92d0b3e00ca074ba2c4898f68e7334
     vertices: []
     indices: 
     edges: []

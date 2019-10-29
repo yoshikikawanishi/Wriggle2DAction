@@ -12,18 +12,20 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager> {
 
 
     //Reduce
-    public void Reduce_Life() {
+    public int Reduce_Life() {
         life--;
         if(life == 0) {
             GameManager.Instance.Miss();
         }
+        return life;
     }
 
-    public void Reduce_Stock() {
+    public int Reduce_Stock() {
         stock--;
         if (stock == -1) {
             GameManager.Instance.Game_Over();
         }
+        return stock;
     }
 
     //Add
@@ -45,6 +47,9 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager> {
         return stock;
     }
 
+    public int Get_Beetle_Power() {
+        return beetle_Power;
+    }
 
     //Setter
     public void Set_Life(int life) {
@@ -65,5 +70,14 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager> {
         }
     }
 
+    public void Set_Beetle_Power(int beetle_Power) {
+        if(beetle_Power < 0) {
+            beetle_Power = 0;
+        }
+        else if(beetle_Power > 100) {
+            beetle_Power = 100;
+        }
+        this.beetle_Power = beetle_Power;
+    }
 
 }

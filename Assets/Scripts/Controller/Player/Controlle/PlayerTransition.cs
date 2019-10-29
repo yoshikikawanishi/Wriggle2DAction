@@ -22,7 +22,8 @@ public class PlayerTransition : MonoBehaviour {
     //移動
     public void Transition(int direction) {
         if (Time.timeScale == 0) return;
-        
+        direction = direction > 0 ? 1 : -1;
+
         //空中で慣性つける
         acc = _controller.is_Landing ? 20f : 6f;
         //移動、加速
@@ -37,6 +38,13 @@ public class PlayerTransition : MonoBehaviour {
         //アニメーション
         if (_controller.is_Landing) {
             _controller.Change_Animation("DashBool");
+        }
+        else {
+            _controller.Change_Animation("JumpBool");
+        }
+        //向き
+        if(transform.localScale.x != direction) {
+            transform.localScale = new Vector3(direction, 1, 1);
         }
     }
 

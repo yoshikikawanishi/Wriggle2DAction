@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MBLDefine;
 
 public class PlayerController : MonoBehaviour {
 
@@ -12,6 +13,8 @@ public class PlayerController : MonoBehaviour {
     private PlayerJump _jump;
     private PlayerAttack _attack;
     private PlayerGettingOnBeetle _getting_On_Beetle;
+    //キー入力用
+    private InputManager input;
 
     //状態
     public bool is_Playable = true;
@@ -38,6 +41,7 @@ public class PlayerController : MonoBehaviour {
         _jump = GetComponent<PlayerJump>();
         _attack = GetComponent<PlayerAttack>();
         _getting_On_Beetle = GetComponent<PlayerGettingOnBeetle>();
+        input = InputManager.Instance;
     }
 
 
@@ -70,17 +74,17 @@ public class PlayerController : MonoBehaviour {
             _transition.Slow_Down();
         }
         //ジャンプ
-        if (Input.GetKey(KeyCode.Z) && is_Landing) {
+        if (input.GetKey(Key.Jump) && is_Landing) {
             _jump.Jump();
         }
-        if (Input.GetKeyUp(KeyCode.Z)) {
+        if (input.GetKeyUp(Key.Jump)) {
             _jump.Slow_Down();
         }
         //近接攻撃
         Attack();
         //カブトムシに乗る
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            _getting_On_Beetle.Get_On_Beetle();
+        if (input.GetKeyDown(Key.Ride)) {
+            _getting_On_Beetle.Get_On_Beetle(true);
         }
         //パワーの回復
 
@@ -92,29 +96,17 @@ public class PlayerController : MonoBehaviour {
         //移動
         Vector2 direction = new Vector2(0, 0);
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (input.GetKey(Key.Slow))
             direction *= 0.3f;
         _transition_Beetle.Transition(direction);
-        //向き
-        transform.localScale = new Vector3(1, 1);
         //ショット
 
         //カブトムシから降りる
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (input.GetKeyDown(Key.Ride)) {
             _getting_On_Beetle.Get_Off_Beetle();
         }
         //パワーの消費
 
-    }
-
-    //カブトムシ無効化
-    public void To_Disable_Ride_Beetle() {
-        _getting_On_Beetle.To_Disable();
-    }
-
-    //カブトムシ無効化解除
-    public void To_Enable_Ride_Beetle() {
-        _getting_On_Beetle.To_Enable();
     }
 
 
@@ -122,7 +114,7 @@ public class PlayerController : MonoBehaviour {
     //注意：もし、攻撃発生までにis_Playableがfalseになっても、攻撃は続行する
     public void Attack() {
         //入力を受け取ったら、少しだけ待つ
-        if (Input.GetKeyDown(KeyCode.X)) {
+        if (input.GetKeyDown(Key.Attack)) {
             start_Attack_Frame_Count = true;
         }
         //待ってる間に下が押されたらキック、1度も押されなかったら横攻撃
@@ -167,5 +159,31 @@ public class PlayerController : MonoBehaviour {
     public bool Get_Is_Ride_Beetle() {
         return is_Ride_Beetle;
     }
-    
+
+    //カブトムシ無効化
+    public void To_Disable_Ride_Beetle() {
+        _getting_On_Beetle.To_Disable();
+    }
+
+    //カブトムシ無効化解除
+    public void To_Enable_Ride_Beetle() {
+        _getting_On_Beetle.To_Enable();
+    }
+
+    //カブトムシ時のスクロール速度変化
+    public void Change_Beetle_Scroll_Speed(float speed) {
+        _getting_On_Beetle.Set_Scroll_Speed(speed);
+    }
+
+    //カブトムシ時の方向変更
+    public void Change_Beetle_Direction(int scale_X) {
+        _transition_Beetle.Change_Body_Direction(scale_X);
+    }
+
+    //カブトムシ時の方向取得
+    public int Get_Beetle_Direction() {
+        return _transition_Beetle.Get_Beetle_Direction();
+    }
+
+   
 }

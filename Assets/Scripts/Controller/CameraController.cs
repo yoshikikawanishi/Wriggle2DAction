@@ -6,10 +6,12 @@ public class CameraController : MonoBehaviour {
 
     //自機
     private GameObject player;
-
-    //自機との距離
+    private Rigidbody2D player_Rigid;
+    
+    //自機との距離、自機の向き
+    private float camera_Center;
     private float distance_Center;
-    private float auto_Scroll_Speed = 0.01f;
+    private float auto_Scroll_Speed = 0.01f;    
 
     //強制スクロール化
     private bool is_Auto_Scroll = false;
@@ -17,14 +19,17 @@ public class CameraController : MonoBehaviour {
     //端
     [SerializeField] private float left_Side = 0;
     [SerializeField] private float right_Side = 5000f;
-    
+
+    //ステージの方向
+    public int stage_Direction = 1;
 
 
 	// Use this for initialization
 	void Start () {
         //取得
         player = GameObject.FindWithTag("PlayerTag");
-	}	
+        player_Rigid = player.GetComponent<Rigidbody2D>();
+    }	
 
 
     private void FixedUpdate() {
@@ -51,20 +56,21 @@ public class CameraController : MonoBehaviour {
     }
 
 
-    private void Follow_Player() {
+    private void Follow_Player() {        
         //中心との距離が遠いとき、補完する
-        distance_Center = (player.transform.position.x + 64f) - transform.position.x;
-        if (Mathf.Abs(distance_Center) < 4f) {
-            transform.position = new Vector3(player.transform.position.x + 64f, 0, -10f);
-        }
-        else {            
-            transform.position += new Vector3(distance_Center.CompareTo(0) * 5, 0, 0);
+        camera_Center = player.transform.position.x + 80f * stage_Direction;
+        distance_Center = camera_Center - transform.position.x;
+        if (Mathf.Abs(distance_Center) < 5.0f) {
+            transform.position = new Vector3(camera_Center, 0, -10f);            
+        }        
+        else {
+            transform.position += new Vector3(distance_Center.CompareTo(0) * 5.0f, 0, 0);
         }
     }
 
 
     private void Auto_Scroll() {
-        transform.position += new Vector3(auto_Scroll_Speed, 0, 0);   
+        transform.position += new Vector3(auto_Scroll_Speed * stage_Direction, 0, 0);   
     }
 
 

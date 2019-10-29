@@ -22,10 +22,10 @@ public class PlayerFootCollision : MonoBehaviour {
         if (player_Controller.Get_Is_Ride_Beetle()) {
             return;
         }
-        foreach(string tag_Name in TagManager.LAND_TAG_LIST) {
-            if (player_Controller.is_Landing) {
-                break;
-            }
+        if (player_Controller.is_Landing) {
+            return;
+        }
+        foreach (string tag_Name in TagManager.LAND_TAG_LIST) {            
             if (collision.tag == tag_Name) {
                 player_Controller.is_Landing = true;
                 Landing();                
@@ -39,7 +39,7 @@ public class PlayerFootCollision : MonoBehaviour {
         foreach(string tag_Name in TagManager.LAND_TAG_LIST) {
             if(collision.tag == tag_Name) {
                 player_Controller.is_Landing = false;
-                GameManager.Instance.Set_Revive_Point(player.transform.position);
+                GameManager.Instance.Set_Revive_Point(player.transform.position);                
             }
         }        
     }

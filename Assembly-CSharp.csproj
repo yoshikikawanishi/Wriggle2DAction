@@ -88,16 +88,26 @@
     <Compile Include="Assets\Scripts\Function\Common\ShootFunction\ShootFunction.cs" />
     <Compile Include="Assets\Scripts\Function\Singleton\BackGroundEffector.cs" />
     <Compile Include="Assets\Scripts\Function\Singleton\FadeInOut.cs" />
+    <Compile Include="Assets\Scripts\Function\Static\TextFileReader.cs" />
     <Compile Include="Assets\Scripts\Function\Static\TransformExtensions.cs" />
     <Compile Include="Assets\Scripts\Function\Unique\CustomStandaloneInputModule.cs" />
     <Compile Include="Assets\Scripts\Function\Unique\InstanceObject.cs" />
+    <Compile Include="Assets\Scripts\Function\Unique\KeyConfig\ConfigButton.cs" />
+    <Compile Include="Assets\Scripts\Function\Unique\KeyConfig\InputManager.cs" />
+    <Compile Include="Assets\Scripts\Function\Unique\KeyConfig\KeyConfig.cs" />
+    <Compile Include="Assets\Scripts\Function\Unique\KeyConfig\MBLDefine.cs" />
     <Compile Include="Assets\Scripts\Function\Unique\RevivePointCorrection.cs" />
     <Compile Include="Assets\Scripts\Function\Unique\SingletonMonoBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Manager\DataManager.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\Scripts\Manager\ObjectPoolManager.cs" />
     <Compile Include="Assets\Scripts\Manager\PauseManager.cs" />
     <Compile Include="Assets\Scripts\Manager\PlayerManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\SceneManagement.cs" />
     <Compile Include="Assets\Scripts\Manager\TagManager.cs" />
+    <Compile Include="Assets\Scripts\Test.cs" />
+    <None Include="Assets\StreamingAssets\KeyConfig.txt" />
+    <None Include="Assets\StreamingAssets\VisitedSceneList.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/yoshi/UnityProject/リグル2Ðアクション(仮)/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

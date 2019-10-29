@@ -75,6 +75,7 @@ public class PlayerAttack : MonoBehaviour {
             //敵と衝突時反動
             if (kick_Collision.Hit_Trigger()) {                
                 _rigid.velocity = new Vector2(40f * -transform.localScale.x, 180f);
+                _controller.Change_Animation("JumpBool");
                 yield return new WaitForSeconds(0.15f);
                 break;
             }

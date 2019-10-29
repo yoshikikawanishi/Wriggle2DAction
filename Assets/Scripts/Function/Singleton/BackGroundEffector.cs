@@ -10,12 +10,7 @@ public class BackGroundEffector : SingletonMonoBehaviour<BackGroundEffector> {
     private new void Awake() {
         back_Ground_Sprite = back_Ground.GetComponent<SpriteRenderer>();
     }
-
-    private void Start() {
-        //テスト
-        Start_Change_Color(new Color(0.8f, 0.5f, 0.23f), 0.001f);
-    }
-
+    
 
     /// <summary>
     /// 背景の色を変える
