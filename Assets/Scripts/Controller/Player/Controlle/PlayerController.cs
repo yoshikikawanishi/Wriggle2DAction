@@ -83,11 +83,9 @@ public class PlayerController : MonoBehaviour {
         //近接攻撃
         Attack();
         //カブトムシに乗る
-        if (input.GetKeyDown(Key.Ride)) {
+        if (input.GetKeyDown(Key.Ride) && BeetlePowerManager.Instance.Get_Beetle_Power() > 0) {
             _getting_On_Beetle.Get_On_Beetle(true);
-        }
-        //パワーの回復
-
+        }        
     }
 
 
@@ -102,11 +100,11 @@ public class PlayerController : MonoBehaviour {
         //ショット
 
         //カブトムシから降りる
-        if (input.GetKeyDown(Key.Ride)) {
+        if (input.GetKeyDown(Key.Ride) || BeetlePowerManager.Instance.Get_Beetle_Power() <= 0) {
             _getting_On_Beetle.Get_Off_Beetle();
         }
         //パワーの消費
-
+        BeetlePowerManager.Instance.Decrease_In_Update(5.0f);
     }
 
 

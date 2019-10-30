@@ -13,7 +13,7 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
         Vector2 pos     = save_Point;
         int life        = PlayerManager.Instance.Get_Life();
         int stock       = PlayerManager.Instance.Get_Stock();
-        int beetle_Power = PlayerManager.Instance.Get_Beetle_Power();
+        int beetle_Power = BeetlePowerManager.Instance.Get_Beetle_Power();
 
         //データの保存
         PlayerPrefs.SetString   ("SCENE", scene);
@@ -46,7 +46,7 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
         SceneManager.LoadScene(scene);
         PlayerManager.Instance.Set_Life(life);
         PlayerManager.Instance.Set_Stock(stock);
-        PlayerManager.Instance.Set_Beetle_Power(beetle_Power);
+        BeetlePowerManager.Instance.Set_Beetle_Power(beetle_Power);
         yield return null;
         GameObject player = GameObject.FindWithTag("PlayerTag");
         if(player == null) 

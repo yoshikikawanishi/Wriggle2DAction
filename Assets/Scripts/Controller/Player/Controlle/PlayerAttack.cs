@@ -41,7 +41,8 @@ public class PlayerAttack : MonoBehaviour {
         for(float t = 0; t < 0.18f; t += Time.deltaTime) {
             //敵と衝突時反動
             if (attack_Collision.Hit_Trigger()) {
-                _rigid.velocity = new Vector2(50f * -transform.localScale.x, 100f);
+                _rigid.velocity = new Vector2(50f * -transform.localScale.x, 50f);
+                BeetlePowerManager.Instance.StartCoroutine("Increase_Cor", 10);
                 Time.timeScale = 0.6f;
                 break;
             }
@@ -75,6 +76,7 @@ public class PlayerAttack : MonoBehaviour {
             //敵と衝突時反動
             if (kick_Collision.Hit_Trigger()) {                
                 _rigid.velocity = new Vector2(40f * -transform.localScale.x, 180f);
+                BeetlePowerManager.Instance.StartCoroutine("Increase_Cor", 15);
                 _controller.Change_Animation("JumpBool");
                 yield return new WaitForSeconds(0.15f);
                 break;

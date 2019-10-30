@@ -8,7 +8,6 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager> {
     //絶対にSetter, Getterとかを使うこと
     private int life = 3;
     private int stock = 2;
-    private int beetle_Power = 0;
 
 
     //Reduce
@@ -47,9 +46,7 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager> {
         return stock;
     }
 
-    public int Get_Beetle_Power() {
-        return beetle_Power;
-    }
+    
 
     //Setter
     public void Set_Life(int life) {
@@ -68,16 +65,6 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager> {
         if (stock == -1) {
             GameManager.Instance.Game_Over();
         }
-    }
-
-    public void Set_Beetle_Power(int beetle_Power) {
-        if(beetle_Power < 0) {
-            beetle_Power = 0;
-        }
-        else if(beetle_Power > 100) {
-            beetle_Power = 100;
-        }
-        this.beetle_Power = beetle_Power;
-    }
+    }    
 
 }

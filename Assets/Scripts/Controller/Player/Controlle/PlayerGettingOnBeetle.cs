@@ -97,6 +97,7 @@ public class PlayerGettingOnBeetle : MonoBehaviour {
 
     //ステータス変更
     private void Change_To_Beetle_Status() {
+        transform.SetParent(main_Camera.transform);     //カメラの子に
         _controller.Change_Animation("RideBeetleBool"); //アニメーション
         GetComponent<Rigidbody2D>().gravityScale = 0;   //重力
         player_Body.GetComponent<CapsuleCollider2D>().size = new Vector2(6f, 6f);//当たり判定
@@ -157,6 +158,7 @@ public class PlayerGettingOnBeetle : MonoBehaviour {
 
     //ステータス変更
     private void Change_To_Default_Status() {
+        transform.SetParent(null);                                              //親子関係解除
         string anim_Parm = _controller.is_Landing ? "IdleBool" : "JumpBool";    //アニメーション
         _controller.Change_Animation(anim_Parm);           
         GetComponent<Rigidbody2D>().gravityScale = default_Gravity;             //重力
