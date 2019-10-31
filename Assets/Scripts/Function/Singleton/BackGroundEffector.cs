@@ -8,6 +8,10 @@ public class BackGroundEffector : SingletonMonoBehaviour<BackGroundEffector> {
     private SpriteRenderer back_Ground_Sprite;
 
     private new void Awake() {
+        if(back_Ground == null) {
+            Debug.Log("Set_BackGround_BackGroundEffecter");
+            return;
+        }
         back_Ground_Sprite = back_Ground.GetComponent<SpriteRenderer>();
     }
     

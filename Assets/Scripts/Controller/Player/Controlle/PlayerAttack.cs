@@ -43,16 +43,16 @@ public class PlayerAttack : MonoBehaviour {
             if (attack_Collision.Hit_Trigger()) {
                 _rigid.velocity = new Vector2(50f * -transform.localScale.x, 50f);
                 BeetlePowerManager.Instance.StartCoroutine("Increase_Cor", 10);
+                //ヒットストップ
                 Time.timeScale = 0.6f;
+                yield return new WaitForSeconds(0.05f);
                 break;
             }
             yield return null;
         }
 
         can_Attack = true;
-        yield return new WaitForSeconds(0.05f);
         Time.timeScale = 1.0f;
-        yield return new WaitForSeconds(0.05f);
         attack_Collision.Make_Collider_Disappear();        
     }
 

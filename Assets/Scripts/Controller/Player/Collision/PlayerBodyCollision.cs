@@ -32,6 +32,10 @@ public class PlayerBodyCollision : MonoBehaviour {
                 StartCoroutine("Damaged");
             }
         }
+        //Miss時
+        if(collision.tag == "MissZoneTag") {
+            Miss();
+        }
     }
 
 
@@ -66,6 +70,13 @@ public class PlayerBodyCollision : MonoBehaviour {
         is_Damaged = false;
     }
 
+
+    //MissZoneに当たったときの処理
+    private void Miss() {
+        PlayerManager.Instance.Set_Life(0);
+    }
+
+
     //点滅
     private IEnumerator Blink() {
         Renderer player_Renderer = player.GetComponent<Renderer>();
@@ -77,5 +88,8 @@ public class PlayerBodyCollision : MonoBehaviour {
             yield return new WaitForSeconds(span);
         }
     }
+
+
+    
 
 }

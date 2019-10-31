@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
     private PlayerTransitionRidingBeetle _transition_Beetle;
     private PlayerJump _jump;
     private PlayerAttack _attack;
+    private PlayerShoot _shoot;
     private PlayerGettingOnBeetle _getting_On_Beetle;
     //キー入力用
     private InputManager input;
@@ -27,8 +28,8 @@ public class PlayerController : MonoBehaviour {
 
     private string now_Animator_Parameter = "IdleBool";
 
-    private float attack_Time = 0.5f;
-    private float attack_Interval = 0.5f;
+    private float SHOOT_INTERVAL = 0.2f;
+    private float shoot_Time = 0.2f;
 
 
     //Awake
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour {
         _transition_Beetle = GetComponent<PlayerTransitionRidingBeetle>();
         _jump = GetComponent<PlayerJump>();
         _attack = GetComponent<PlayerAttack>();
+        _shoot = GetComponent<PlayerShoot>();
         _getting_On_Beetle = GetComponent<PlayerGettingOnBeetle>();
         input = InputManager.Instance;
     }
@@ -98,10 +100,10 @@ public class PlayerController : MonoBehaviour {
             direction *= 0.3f;
         _transition_Beetle.Transition(direction);
         //ショット
-
+        Shoot();
         //カブトムシから降りる
         if (input.GetKeyDown(Key.Ride) || BeetlePowerManager.Instance.Get_Beetle_Power() <= 0) {
-            _getting_On_Beetle.Get_Off_Beetle();
+            _getting_On_Beetle.Get_Off_Beetle(true);
         }
         //パワーの消費
         BeetlePowerManager.Instance.Decrease_In_Update(5.0f);
@@ -127,6 +129,19 @@ public class PlayerController : MonoBehaviour {
             else return;
             attack_Frame_Count = 0;
             start_Attack_Frame_Count = false;
+        }
+    }
+
+
+    //ショット
+    public void Shoot() {
+        if (shoot_Time < SHOOT_INTERVAL) {
+            shoot_Time += Time.deltaTime;
+        }
+        else {
+            if (input.GetKeyDown(Key.Shoot)) {
+                _shoot.Shoot();
+            }
         }
     }
 

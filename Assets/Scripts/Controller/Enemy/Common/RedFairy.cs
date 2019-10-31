@@ -18,7 +18,16 @@ public class RedFairy : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-                        
+        //止まらないようにする
+        if (Mathf.Abs(_rigid.velocity.x) < 5f) {
+            int direction = -transform.localScale.x.CompareTo(0);
+            _rigid.velocity = new Vector2(direction * 40, _rigid.velocity.y);
+        }
+        //落下時消す
+        if(transform.position.y < -170f) {
+            Destroy(gameObject);
+        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

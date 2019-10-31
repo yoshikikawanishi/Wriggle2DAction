@@ -22,6 +22,9 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
         PlayerPrefs.SetInt      ("LIFE", life);
         PlayerPrefs.SetInt      ("STOCK", stock);
         PlayerPrefs.SetInt      ("BEETLE_POWER", beetle_Power);
+
+        //テスト
+        Debug_Print_Player_Data();
     }
 
 
@@ -76,6 +79,30 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
     //データの消去
     public void Delete_Player_Data() {
         PlayerPrefs.DeleteAll();
+    }
+
+
+    //セーブデータの表示
+    public void Debug_Print_Player_Data() {
+        //データの取得
+        if (!PlayerPrefs.HasKey("SCENE")) {
+            Initialize_Player_Data();
+        }
+        string scene = PlayerPrefs.GetString("SCENE");
+        float pos_X = PlayerPrefs.GetFloat("POS_X");
+        float pos_Y = PlayerPrefs.GetFloat("POS_Y");
+        int life = PlayerPrefs.GetInt("LIFE");
+        int stock = PlayerPrefs.GetInt("STOCK");
+        int beetle_Power = PlayerPrefs.GetInt("BEETLE_POWER");
+
+        Debug.Log(
+            "SaveData\n"
+            + "Scene : "    + scene + "\n"
+            + "Position : " + new Vector2(pos_X, pos_Y).ToString() + "\n"
+            + "Life : "     + life.ToString() + "\n"
+            + "Stock : "    + stock.ToString() + "\n"
+            + "BeetlePower : " + beetle_Power.ToString()
+            );
     }
 
 }

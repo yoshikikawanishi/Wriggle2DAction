@@ -111,20 +111,39 @@ public class PlayerGettingOnBeetle : MonoBehaviour {
     #region Get Off Beetle
 
     //カブトムシから降りる
-    public void Get_Off_Beetle() {
-        if (can_Get_On_Beetle) {
+    public void Get_Off_Beetle(bool is_Stop_Time) {
+        if (!can_Get_On_Beetle) {
+            return;
+        }
+        if (is_Stop_Time) {
             StopAllCoroutines();
-            _controller.is_Ride_Beetle = false;
             StartCoroutine("Get_Off_Beetle_Cor");
+        }
+        else {
+            _controller.is_Ride_Beetle = false;
+            string anim_Parm = _controller.is_Landing ? "IdleBool" : "JumpBool";    //アニメーション
+            _controller.Change_Animation(anim_Parm);
+            Change_To_Default_Status();
         }
     }    
 
     private IEnumerator Get_Off_Beetle_Cor() {
         can_Get_On_Beetle = false;
-        //カブトムシ退場
-        StartCoroutine("Leaving_Beetle_Cor");
+
+        //時間停止
+        Time.timeScale = 0;
+        PauseManager.Instance.Set_Is_Pausable(false);
         //ステータス変更
         Change_To_Default_Status();
+        //カブトムシ退場
+        StartCoroutine("Leaving_Beetle_Cor");
+        for (float t = 0; t < 0.8f; t += 0.016f) { yield return null; }        
+
+        PauseManager.Instance.Set_Is_Pausable(true);
+        Time.timeScale = 1;
+
+        _controller.is_Ride_Beetle = false;
+
         yield return new WaitForSeconds(0.8f);
         can_Get_On_Beetle = true;
     }
@@ -157,13 +176,14 @@ public class PlayerGettingOnBeetle : MonoBehaviour {
     }
 
     //ステータス変更
-    private void Change_To_Default_Status() {
-        transform.SetParent(null);                                              //親子関係解除
+    private void Change_To_Default_Status() {        
         string anim_Parm = _controller.is_Landing ? "IdleBool" : "JumpBool";    //アニメーション
-        _controller.Change_Animation(anim_Parm);           
+        _controller.Change_Animation(anim_Parm);
+        transform.SetParent(null);                                              //親子関係解除                 
         GetComponent<Rigidbody2D>().gravityScale = default_Gravity;             //重力
         player_Body.GetComponent<CapsuleCollider2D>().size = default_Collider_Size;   //当たり判定
         player_Body.GetComponent<SpriteRenderer>().enabled = false;
+        transform.position += new Vector3(0, 4f, 0);
         main_Camera.GetComponent<CameraController>().Quit_Auto_Scroll();        //オートスクロール
     }
 
@@ -172,7 +192,7 @@ public class PlayerGettingOnBeetle : MonoBehaviour {
     //飛行無効化
     public void To_Disable() {
         if (_controller.is_Ride_Beetle) {
-            Get_Off_Beetle();
+            Get_Off_Beetle(true);
         }
         can_Get_On_Beetle = false;
     }

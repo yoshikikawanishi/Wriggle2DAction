@@ -16,6 +16,7 @@ TagManager:
   - EnemyBulletTag
   - ScreenWallTag
   - InvisibleWallTag
+  - MissZoneTag
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - PlayerLayer
   - EnemyLayer
   - InvincibleLayer
-  - 
+  - ScreenWallLayer
   - 
   - 
   - 

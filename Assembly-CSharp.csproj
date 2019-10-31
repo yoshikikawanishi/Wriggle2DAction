@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\Controller\Enemy\Common\RedFairy.cs" />
     <Compile Include="Assets\Scripts\Controller\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Controller\Enemy\EnemyCollisionDetection.cs" />
+    <Compile Include="Assets\Scripts\Controller\Object\SavePoint.cs" />
     <Compile Include="Assets\Scripts\Controller\Player\Collision\PlayerAttackCollision.cs" />
     <Compile Include="Assets\Scripts\Controller\Player\Collision\PlayerBodyCollision.cs" />
     <Compile Include="Assets\Scripts\Controller\Player\Collision\PlayerCore.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Assets\Scripts\Controller\Player\Controlle\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Controller\Player\Controlle\PlayerGettingOnBeetle.cs" />
     <Compile Include="Assets\Scripts\Controller\Player\Controlle\PlayerJump.cs" />
+    <Compile Include="Assets\Scripts\Controller\Player\Controlle\PlayerShoot.cs" />
     <Compile Include="Assets\Scripts\Controller\Player\Controlle\PlayerTransition.cs" />
     <Compile Include="Assets\Scripts\Controller\Player\Controlle\PlayerTransitionRidingBeetle.cs" />
     <Compile Include="Assets\Scripts\Function\Common\AngleCalculater.cs" />
@@ -86,6 +88,8 @@
     <Compile Include="Assets\Scripts\Function\Common\ScreenFrameGenerator.cs" />
     <Compile Include="Assets\Scripts\Function\Common\ShootFunction\Bullet.cs" />
     <Compile Include="Assets\Scripts\Function\Common\ShootFunction\BulletAccelerator.cs" />
+    <Compile Include="Assets\Scripts\Function\Common\ShootFunction\EnemyBullet.cs" />
+    <Compile Include="Assets\Scripts\Function\Common\ShootFunction\PlayerBullet.cs" />
     <Compile Include="Assets\Scripts\Function\Common\ShootFunction\ShootFunction.cs" />
     <Compile Include="Assets\Scripts\Function\Singleton\BackGroundEffector.cs" />
     <Compile Include="Assets\Scripts\Function\Singleton\FadeInOut.cs" />

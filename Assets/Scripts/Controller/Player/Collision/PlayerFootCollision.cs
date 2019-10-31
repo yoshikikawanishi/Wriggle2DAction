@@ -39,7 +39,6 @@ public class PlayerFootCollision : MonoBehaviour {
         foreach(string tag_Name in TagManager.LAND_TAG_LIST) {
             if(collision.tag == tag_Name) {
                 player_Controller.is_Landing = false;
-                GameManager.Instance.Set_Revive_Point(player.transform.position);                
             }
         }        
     }
