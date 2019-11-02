@@ -50,10 +50,10 @@ public class PlayerAttack : MonoBehaviour {
             }
             yield return null;
         }
+        attack_Collision.Make_Collider_Disappear();
 
         can_Attack = true;
-        Time.timeScale = 1.0f;
-        attack_Collision.Make_Collider_Disappear();        
+        Time.timeScale = 1.0f;       
     }
 
 

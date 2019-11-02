@@ -135,6 +135,7 @@ public class PlayerController : MonoBehaviour {
 
     //ショット
     public void Shoot() {
+        //通常ショット
         if (shoot_Time < SHOOT_INTERVAL) {
             shoot_Time += Time.deltaTime;
         }
@@ -142,6 +143,13 @@ public class PlayerController : MonoBehaviour {
             if (input.GetKeyDown(Key.Shoot)) {
                 _shoot.Shoot();
             }
+        }
+        //チャージショット
+        if (input.GetKey(Key.Shoot)) {
+            _shoot.Charge();
+        }
+        if (input.GetKeyUp(Key.Shoot)) {
+            _shoot.Charge_Shoot();
         }
     }
 
@@ -198,5 +206,17 @@ public class PlayerController : MonoBehaviour {
         return _transition_Beetle.Get_Beetle_Direction();
     }
 
+    //点滅
+    public IEnumerator Blink(float time_Length) {
+        Renderer player_Renderer = GetComponent<Renderer>();
+        float t = 0;
+        while (t < time_Length) {
+            player_Renderer.enabled = false;
+            yield return new WaitForSeconds(0.1f);
+            player_Renderer.enabled = true;
+            yield return new WaitForSeconds(0.1f);
+            t += 0.2f;
+        }        
+    }
    
 }

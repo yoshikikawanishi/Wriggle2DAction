@@ -8,9 +8,10 @@ public class PlayerGettingOnBeetle : MonoBehaviour {
     private GameObject beetle;
 
     private GameObject main_Camera;
-    private GameObject player_Body;
+    private GameObject beetle_Body;
 
     private PlayerController _controller;
+    private PlayerBodyCollision body_Collision;
 
     private bool can_Get_On_Beetle = true;
 
@@ -24,7 +25,8 @@ public class PlayerGettingOnBeetle : MonoBehaviour {
     private void Start() {
         //取得
         main_Camera = GameObject.FindWithTag("MainCamera");
-        player_Body = transform.Find("Body").gameObject;
+        beetle_Body = transform.Find("BeetleBody").gameObject;
+        body_Collision = GetComponentInChildren<PlayerBodyCollision>();
         _controller = GetComponent<PlayerController>();
 
         //初期値代入
@@ -97,11 +99,12 @@ public class PlayerGettingOnBeetle : MonoBehaviour {
 
     //ステータス変更
     private void Change_To_Beetle_Status() {
-        transform.SetParent(main_Camera.transform);     //カメラの子に
-        _controller.Change_Animation("RideBeetleBool"); //アニメーション
-        GetComponent<Rigidbody2D>().gravityScale = 0;   //重力
-        player_Body.GetComponent<CapsuleCollider2D>().size = new Vector2(6f, 6f);//当たり判定
-        player_Body.GetComponent<SpriteRenderer>().enabled = true;
+        transform.SetParent(main_Camera.transform);                 //カメラの子に
+        _controller.Change_Animation("RideBeetleBool");             //アニメーション
+        GetComponent<Rigidbody2D>().gravityScale = 0;               //重力
+        body_Collision.Change_Collider_Size(new Vector2(6f, 6f));   //当たり判定
+        body_Collision.Display_Sprite();
+        beetle_Body.SetActive(true);
         main_Camera.GetComponent<CameraController>().Start_Auto_Scroll(scroll_Speed);  //オートスクロール
     }
 
@@ -179,15 +182,17 @@ public class PlayerGettingOnBeetle : MonoBehaviour {
     private void Change_To_Default_Status() {        
         string anim_Parm = _controller.is_Landing ? "IdleBool" : "JumpBool";    //アニメーション
         _controller.Change_Animation(anim_Parm);
+
         transform.SetParent(null);                                              //親子関係解除                 
         GetComponent<Rigidbody2D>().gravityScale = default_Gravity;             //重力
-        player_Body.GetComponent<CapsuleCollider2D>().size = default_Collider_Size;   //当たり判定
-        player_Body.GetComponent<SpriteRenderer>().enabled = false;
-        transform.position += new Vector3(0, 4f, 0);
+        body_Collision.Change_Collider_Size(default_Collider_Size);             //当たり判定
+        body_Collision.Hide_Sprite();
+        beetle_Body.SetActive(false);
         main_Camera.GetComponent<CameraController>().Quit_Auto_Scroll();        //オートスクロール
     }
 
     #endregion
+
 
     //飛行無効化
     public void To_Disable() {

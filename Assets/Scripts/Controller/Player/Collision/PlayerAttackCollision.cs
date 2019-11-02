@@ -24,8 +24,8 @@ public class PlayerAttackCollision : MonoBehaviour {
 
 
     public void Make_Collider_Appear() {
-        GetComponent<BoxCollider2D>().enabled = true;
         is_Hit_Attack = false;
+        GetComponent<BoxCollider2D>().enabled = true;        
         Play_Animation();
     }
 

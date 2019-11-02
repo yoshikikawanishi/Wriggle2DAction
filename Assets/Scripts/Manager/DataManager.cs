@@ -13,6 +13,8 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
         Vector2 pos     = save_Point;
         int life        = PlayerManager.Instance.Get_Life();
         int stock       = PlayerManager.Instance.Get_Stock();
+        int power       = PlayerManager.Instance.Get_Power();
+        int score       = PlayerManager.Instance.Get_Score();
         int beetle_Power = BeetlePowerManager.Instance.Get_Beetle_Power();
 
         //データの保存
@@ -21,6 +23,8 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
         PlayerPrefs.SetFloat    ("POS_Y", pos.y);
         PlayerPrefs.SetInt      ("LIFE", life);
         PlayerPrefs.SetInt      ("STOCK", stock);
+        PlayerPrefs.SetInt      ("POWER", power);
+        PlayerPrefs.SetInt      ("SCORE", score);
         PlayerPrefs.SetInt      ("BEETLE_POWER", beetle_Power);
 
         //テスト
@@ -43,12 +47,16 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
         float pos_Y     = PlayerPrefs.GetFloat("POS_Y");
         int life        = PlayerPrefs.GetInt("LIFE");
         int stock       = PlayerPrefs.GetInt("STOCK");
+        int power       = PlayerPrefs.GetInt("POWER");
+        int score       = PlayerPrefs.GetInt("SCORE");
         int beetle_Power = PlayerPrefs.GetInt("BEETLE_POWER");
 
         //データのロード
         SceneManager.LoadScene(scene);
         PlayerManager.Instance.Set_Life(life);
         PlayerManager.Instance.Set_Stock(stock);
+        PlayerManager.Instance.Set_Power(power);
+        PlayerManager.Instance.Set_Score(score);
         BeetlePowerManager.Instance.Set_Beetle_Power(beetle_Power);
         yield return null;
         GameObject player = GameObject.FindWithTag("PlayerTag");
@@ -64,6 +72,8 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
         Vector2 pos = new Vector2(0, 0);
         int life = 3;
         int stock = 3;
+        int power = 0;
+        int score = 0;
         int beetle_Power = 0;
 
         //データの保存
@@ -72,6 +82,8 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
         PlayerPrefs.SetFloat("POS_Y", pos.y);
         PlayerPrefs.SetInt("LIFE", life);
         PlayerPrefs.SetInt("STOCK", stock);
+        PlayerPrefs.SetInt("POWER", power);
+        PlayerPrefs.SetInt("SCORE", score);
         PlayerPrefs.SetInt("BEETLE_POWER", beetle_Power);
     }
 
@@ -93,6 +105,8 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
         float pos_Y = PlayerPrefs.GetFloat("POS_Y");
         int life = PlayerPrefs.GetInt("LIFE");
         int stock = PlayerPrefs.GetInt("STOCK");
+        int power = PlayerPrefs.GetInt("POWER");
+        int score = PlayerPrefs.GetInt("SCORE");
         int beetle_Power = PlayerPrefs.GetInt("BEETLE_POWER");
 
         Debug.Log(
@@ -101,6 +115,8 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
             + "Position : " + new Vector2(pos_X, pos_Y).ToString() + "\n"
             + "Life : "     + life.ToString() + "\n"
             + "Stock : "    + stock.ToString() + "\n"
+            + "Power : "    + power.ToString() + "\n"
+            + "Score : "    + score.ToString() + "\n"
             + "BeetlePower : " + beetle_Power.ToString()
             );
     }
