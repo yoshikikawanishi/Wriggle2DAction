@@ -10,13 +10,13 @@ TagManager:
   - PlayerFootTag
   - PlayerAttackTag
   - PlayerBulletTag
-  - PlayerChargeBullletTag
   - PlayerKickTag
   - EnemyTag
   - EnemyBulletTag
   - ScreenWallTag
   - InvisibleWallTag
   - MissZoneTag
+  - PlayerChargeBulletTag
   layers:
   - Default
   - TransparentFX

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerBullet : Bullet {
 
-    private List<string> delete_Bullet_Obj_Tag = new List<string> {
+    //Inspecter上で編集すること
+    [SerializeField] private List<string> delete_Bullet_Obj_Tag = new List<string> {
         "EnemyTag"
     };
 

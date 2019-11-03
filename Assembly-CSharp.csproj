@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\Controller\Player\Controlle\PlayerAttack.cs" />
     <Compile Include="Assets\Scripts\Controller\Player\Controlle\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Controller\Player\Controlle\PlayerDamaged.cs" />
+    <Compile Include="Assets\Scripts\Controller\Player\Controlle\PlayerEffect.cs" />
     <Compile Include="Assets\Scripts\Controller\Player\Controlle\PlayerGettingOnBeetle.cs" />
     <Compile Include="Assets\Scripts\Controller\Player\Controlle\PlayerJump.cs" />
     <Compile Include="Assets\Scripts\Controller\Player\Controlle\PlayerShoot.cs" />

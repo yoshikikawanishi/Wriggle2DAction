@@ -147,7 +147,7 @@ public class PlayerController : MonoBehaviour {
         //チャージショット
         if (input.GetKey(Key.Shoot)) {
             _shoot.Charge();
-        }
+        }        
         if (input.GetKeyUp(Key.Shoot)) {
             _shoot.Charge_Shoot();
         }

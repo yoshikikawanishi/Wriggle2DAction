@@ -12,7 +12,7 @@ public class EnemyCollisionDetection : MonoBehaviour {
         {"PlayerAttackTag"  , 5 },
         {"PlayerKickTag"    , 10},
         {"PlayerBulletTag"  , 1 },
-        {"PlayerChargeTag"  , 15},
+        {"PlayerChargeBulletTag"  , 10},
         {"PlayerTag"        , 10},
     };
 
@@ -52,7 +52,7 @@ public class EnemyCollisionDetection : MonoBehaviour {
             {"PlayerAttackTag"  , 5 },
             {"PlayerKickTag"    , 10},
             {"PlayerBulletTag"  , 1 },
-            {"PlayerChargeTag"  , 15},
+            {"PlayerChargeBulletTag"  , 10},
             {"PlayerTag"        , 10},
         };
     }
