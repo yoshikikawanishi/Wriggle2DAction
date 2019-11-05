@@ -39,9 +39,9 @@ public class PlayerAttack : MonoBehaviour {
 
         attack_Collision.Make_Collider_Appear();
         for(float t = 0; t < 0.18f; t += Time.deltaTime) {
-            //敵と衝突時反動
+            //敵と衝突時ノックバック
             if (attack_Collision.Hit_Trigger()) {
-                _rigid.velocity = new Vector2(50f * -transform.localScale.x, 50f);
+                Occur_Knock_Back();
                 BeetlePowerManager.Instance.StartCoroutine("Increase_Cor", 10);
                 //ヒットストップ
                 Time.timeScale = 0.6f;
@@ -54,6 +54,12 @@ public class PlayerAttack : MonoBehaviour {
 
         can_Attack = true;
         Time.timeScale = 1.0f;       
+    }
+
+    //ノックバック
+    private void Occur_Knock_Back() {
+        float force = _controller.is_Landing ? 150f : 50f;
+        _rigid.velocity = new Vector2(force * -transform.localScale.x, 20f);
     }
 
 
@@ -73,7 +79,7 @@ public class PlayerAttack : MonoBehaviour {
 
         kick_Collision.Make_Collider_Appear();
         for (float t = 0; t < 0.33f; t += Time.deltaTime) {
-            //敵と衝突時反動
+            //敵と衝突時ノックバック
             if (kick_Collision.Hit_Trigger()) {                
                 _rigid.velocity = new Vector2(40f * -transform.localScale.x, 180f);
                 BeetlePowerManager.Instance.StartCoroutine("Increase_Cor", 15);

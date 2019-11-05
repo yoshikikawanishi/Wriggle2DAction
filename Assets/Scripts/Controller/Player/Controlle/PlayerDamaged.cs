@@ -18,8 +18,7 @@ public class PlayerDamaged : MonoBehaviour {
 
         StartCoroutine("Blink");                                    //点滅
         body_Collision.Become_Invincible();                         //無敵化
-        Vector2 reaction_Velocity = new Vector2(-transform.localScale.x * 120f, 180f);   //反動
-        GetComponent<Rigidbody2D>().velocity = reaction_Velocity;
+        Occure_Knock_Back();                                        //反動        
         yield return new WaitForSeconds(INVINCIBLE_TIME_LENGTH);    //無敵時間
         body_Collision.Release_Invincible();                        //戻す        
     }
@@ -35,6 +34,14 @@ public class PlayerDamaged : MonoBehaviour {
             player_Renderer.enabled = true;
             yield return new WaitForSeconds(span);
         }
+    }
+
+
+    //反動
+    private void Occure_Knock_Back() {
+        PlayerController _controller = GetComponent<PlayerController>();
+        float force = _controller.is_Landing ? 200f : 100f;
+        GetComponent<Rigidbody2D>().velocity = new Vector2(force * -transform.localScale.x, 100f);
     }
 
 

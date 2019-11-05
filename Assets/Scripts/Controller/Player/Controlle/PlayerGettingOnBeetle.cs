@@ -114,37 +114,21 @@ public class PlayerGettingOnBeetle : MonoBehaviour {
     #region Get Off Beetle
 
     //カブトムシから降りる
-    public void Get_Off_Beetle(bool is_Stop_Time) {
+    public void Get_Off_Beetle() {
         if (!can_Get_On_Beetle) {
             return;
         }
-        if (is_Stop_Time) {
-            StopAllCoroutines();
-            StartCoroutine("Get_Off_Beetle_Cor");
-        }
-        else {
-            _controller.is_Ride_Beetle = false;
-            string anim_Parm = _controller.is_Landing ? "IdleBool" : "JumpBool";    //アニメーション
-            _controller.Change_Animation(anim_Parm);
-            Change_To_Default_Status();
-        }
+        StopAllCoroutines();
+        StartCoroutine("Get_Off_Beetle_Cor");                
     }    
 
     private IEnumerator Get_Off_Beetle_Cor() {
         can_Get_On_Beetle = false;
-
-        //時間停止
-        Time.timeScale = 0;
-        PauseManager.Instance.Set_Is_Pausable(false);
+       
         //ステータス変更
         Change_To_Default_Status();
         //カブトムシ退場
-        StartCoroutine("Leaving_Beetle_Cor");
-        for (float t = 0; t < 0.8f; t += 0.016f) { yield return null; }        
-
-        PauseManager.Instance.Set_Is_Pausable(true);
-        Time.timeScale = 1;
-
+        StartCoroutine("Leaving_Beetle_Cor");        
         _controller.is_Ride_Beetle = false;
 
         yield return new WaitForSeconds(0.8f);
@@ -197,7 +181,7 @@ public class PlayerGettingOnBeetle : MonoBehaviour {
     //飛行無効化
     public void To_Disable() {
         if (_controller.is_Ride_Beetle) {
-            Get_Off_Beetle(true);
+            Get_Off_Beetle();
         }
         can_Get_On_Beetle = false;
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using MBLDefine;
 
 public class PauseManager : SingletonMonoBehaviour<PauseManager> {
 
@@ -27,7 +28,7 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager> {
         if (!is_Pausable) {
             return;
         }
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (InputManager.Instance.GetKeyDown(Key.Pause)) {
             if(state == STATE.normal) {
                 Pause_Game();
             }

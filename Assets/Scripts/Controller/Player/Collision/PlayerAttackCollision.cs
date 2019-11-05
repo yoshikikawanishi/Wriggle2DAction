@@ -23,13 +23,13 @@ public class PlayerAttackCollision : MonoBehaviour {
     }
 
 
-    public void Make_Collider_Appear() {
+    public void Make_Collider_Appear() {        
         is_Hit_Attack = false;
         GetComponent<BoxCollider2D>().enabled = true;        
         Play_Animation();
     }
 
-    public void Make_Collider_Disappear() {
+    public void Make_Collider_Disappear() {        
         GetComponent<BoxCollider2D>().enabled = false;
     }
 
