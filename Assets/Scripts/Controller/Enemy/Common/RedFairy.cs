@@ -7,6 +7,8 @@ public class RedFairy : MonoBehaviour {
     //コンポーネント
     private Rigidbody2D _rigid;
     private Renderer _renderer;
+
+    private bool start_Action = false;
     
 
 	// Use this for initialization
@@ -18,8 +20,8 @@ public class RedFairy : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        //止まらないようにする
-        if (Mathf.Abs(_rigid.velocity.x) < 5f) {
+        //歩く
+        if (start_Action && Mathf.Abs(_rigid.velocity.x) < 5f) {
             int direction = -transform.localScale.x.CompareTo(0);
             _rigid.velocity = new Vector2(direction * 40, _rigid.velocity.y);
         }
@@ -31,7 +33,7 @@ public class RedFairy : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        //反転用
+        //反転
         if(collision.tag == "InvisibleWallTag") {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
             _rigid.velocity = new Vector2(_rigid.velocity.x * -1, _rigid.velocity.y);
@@ -40,8 +42,7 @@ public class RedFairy : MonoBehaviour {
 
 
     private void OnBecameVisible() {
-        int direction = -transform.localScale.x.CompareTo(0);
-        _rigid.velocity = new Vector2(direction * 40, _rigid.velocity.y);
+        start_Action = true;
     }
 
 }

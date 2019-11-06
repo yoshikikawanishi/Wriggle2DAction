@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PlayerAttackCollision : MonoBehaviour {
 
-    private bool is_Hit_Attack = false;
+    private bool is_Hit_Attack = false;    
 
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "EnemyTag" && !is_Hit_Attack) {
             is_Hit_Attack = true;
-        }
+        }        
     }
 
 
@@ -24,12 +24,12 @@ public class PlayerAttackCollision : MonoBehaviour {
 
 
     public void Make_Collider_Appear() {        
-        is_Hit_Attack = false;
+        is_Hit_Attack = false;        
         GetComponent<BoxCollider2D>().enabled = true;        
-        Play_Animation();
+        Play_Animation();        
     }
 
-    public void Make_Collider_Disappear() {        
+    public void Make_Collider_Disappear() {
         GetComponent<BoxCollider2D>().enabled = false;
     }
 

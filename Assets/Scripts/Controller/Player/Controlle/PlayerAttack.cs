@@ -15,7 +15,7 @@ public class PlayerAttack : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         //取得
         _controller = GetComponent<PlayerController>();
         _anim = GetComponent<Animator>();
@@ -38,14 +38,16 @@ public class PlayerAttack : MonoBehaviour {
         _anim.SetTrigger("AttackTrigger");
 
         attack_Collision.Make_Collider_Appear();
-        for(float t = 0; t < 0.18f; t += Time.deltaTime) {
+        _rigid.velocity += new Vector2(transform.localScale.x * 5f, 0); //Rigidbodyのスリープ状態を解除する
+        for (float t = 0; t < 0.18f; t += Time.deltaTime) {
             //敵と衝突時ノックバック
             if (attack_Collision.Hit_Trigger()) {
                 Occur_Knock_Back();
                 BeetlePowerManager.Instance.StartCoroutine("Increase_Cor", 10);
                 //ヒットストップ
-                Time.timeScale = 0.6f;
+                Time.timeScale = 0.5f;
                 yield return new WaitForSeconds(0.05f);
+                Time.timeScale = 1.0f;
                 break;
             }
             yield return null;
@@ -53,12 +55,11 @@ public class PlayerAttack : MonoBehaviour {
         attack_Collision.Make_Collider_Disappear();
 
         can_Attack = true;
-        Time.timeScale = 1.0f;       
     }
 
     //ノックバック
     private void Occur_Knock_Back() {
-        float force = _controller.is_Landing ? 150f : 50f;
+        float force = _controller.is_Landing ? 200f : 50f;
         _rigid.velocity = new Vector2(force * -transform.localScale.x, 20f);
     }
 

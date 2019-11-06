@@ -40,11 +40,10 @@ public class CrashBlockController : MonoBehaviour {
             return;
         }
         GameObject effect = transform.GetChild(0).gameObject;
-        if (effect.GetComponent<AudioSource>() != null) {
-            effect.transform.SetParent(null);
-            effect.SetActive(true);
-            Destroy(effect, 1.0f);
-        }
+        effect.transform.SetParent(null);
+        effect.SetActive(true);
+        Destroy(effect, 1.0f);
+
     }
 
 
