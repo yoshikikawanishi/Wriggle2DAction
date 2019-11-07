@@ -107,6 +107,7 @@
     <Compile Include="Assets\Assets\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
     <Compile Include="Assets\Assets\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
     <Compile Include="Assets\Scripts\Controller\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Controller\Enemy\Common\GreenFairy.cs" />
     <Compile Include="Assets\Scripts\Controller\Enemy\Common\RedFairy.cs" />
     <Compile Include="Assets\Scripts\Controller\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Controller\Enemy\EnemyCollisionDetection.cs" />
@@ -131,11 +132,13 @@
     <Compile Include="Assets\Scripts\Controller\Player\Controlle\PlayerTransitionRidingBeetle.cs" />
     <Compile Include="Assets\Scripts\Function\Common\AngleCalculater.cs" />
     <Compile Include="Assets\Scripts\Function\Common\Blink.cs" />
-    <Compile Include="Assets\Scripts\Function\Common\GravitatePlayer.cs" />
-    <Compile Include="Assets\Scripts\Function\Common\MoveTwoPoints.cs" />
+    <Compile Include="Assets\Scripts\Function\Common\Motion\GravitatePlayer.cs" />
+    <Compile Include="Assets\Scripts\Function\Common\Motion\MoveTwoPoints.cs" />
+    <Compile Include="Assets\Scripts\Function\Common\Motion\RotateMotion.cs" />
+    <Compile Include="Assets\Scripts\Function\Common\Motion\SpreadBombController.cs" />
+    <Compile Include="Assets\Scripts\Function\Common\Motion\VerticalMotion.cs" />
     <Compile Include="Assets\Scripts\Function\Common\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\Function\Common\PixelObjectBase.cs" />
-    <Compile Include="Assets\Scripts\Function\Common\RotateObject.cs" />
     <Compile Include="Assets\Scripts\Function\Common\SceneChangeTrigger.cs" />
     <Compile Include="Assets\Scripts\Function\Common\ScreenFrameGenerator.cs" />
     <Compile Include="Assets\Scripts\Function\Common\ShootFunction\Bullet.cs" />

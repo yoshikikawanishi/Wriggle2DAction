@@ -38,12 +38,21 @@ public class Enemy : MonoBehaviour {
 
     //消滅時の処理
     public virtual void Vanish() {
-        //TODO:エフェクト
+        Play_Vanish_Effect();
         if (is_Pooled) {
             gameObject.SetActive(false);
             return;
         }
         Destroy(gameObject);
+    }
+
+
+    //消滅時のエフェクト
+    public virtual void Play_Vanish_Effect() {        
+        GameObject effect_Prefab = Resources.Load("Effect/EnemyVanishEffect") as GameObject;
+        var effect = Instantiate(effect_Prefab);
+        effect.transform.position = transform.position;
+        Destroy(effect, 1.5f);
     }
 
 

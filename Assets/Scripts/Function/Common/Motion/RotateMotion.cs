@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotateObject : MonoBehaviour {
+public class RotateMotion : MonoBehaviour {
 
     [SerializeField] private float rotate_Speed = 0.1f;
 	

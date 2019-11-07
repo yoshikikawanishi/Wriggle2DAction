@@ -77,7 +77,7 @@ public class CameraController : MonoBehaviour {
         //中心との距離が遠いとき、補完する
         camera_Center = player.transform.position.x + 80f * stage_Direction;
         distance_Center = camera_Center - transform.position.x;
-        if (Mathf.Abs(distance_Center) < 5.0f) {
+        if (Mathf.Abs(distance_Center) < 10.0f) {
             transform.position = new Vector3(camera_Center, 0, -10f);            
         }        
         else {
