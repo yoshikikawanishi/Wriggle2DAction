@@ -54,9 +54,10 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager> {
         }
     }
 
-    public void Add_Score() {
-        if (score < MAX_SCORE) {
-            score++;
+    public void Add_Score(int value) {
+        score += value;
+        if (score > MAX_SCORE) {
+            score = MAX_SCORE;
         }
     }
 
@@ -96,10 +97,10 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager> {
         if(stock > MAX_STOCK) {
             return;
         }
-        if (stock >= -1) {
+        if (stock >= 0) {
             this.stock = stock;
         }
-        if (stock == -1) {
+        if (stock == 0) {
             GameManager.Instance.Game_Over();
         }
     }  

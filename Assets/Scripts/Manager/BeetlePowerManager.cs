@@ -43,7 +43,7 @@ public class BeetlePowerManager : SingletonMonoBehaviour<BeetlePowerManager> {
 
     //飛行時の減少
     public void Decrease_In_Update(float rate) {
-        if(decrease_Time < 1 / rate) {
+        if(decrease_Time < 1f / rate) {
             decrease_Time += Time.deltaTime;
         }
         else if(beetle_Power > 0) {
@@ -61,7 +61,7 @@ public class BeetlePowerManager : SingletonMonoBehaviour<BeetlePowerManager> {
                 beetle_Power = MAX;
                 yield break;
             }
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.01f);
         }
     }
     

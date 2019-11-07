@@ -10,6 +10,9 @@ public class Enemy : MonoBehaviour {
     
     [SerializeField] private bool is_Pooled = false;    
     [SerializeField] private int life = 5;
+    [SerializeField] private int power_Value = 0;
+    [SerializeField] private int score_Value = 0;
+    [SerializeField] private float drop_Life_Probability = 1;
 
     private SpriteRenderer _sprite;
 
@@ -19,7 +22,8 @@ public class Enemy : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //取得
-        _sprite = GetComponent<SpriteRenderer>();
+        _sprite = GetComponent<SpriteRenderer>();        
+
 	}
 
 
@@ -39,6 +43,7 @@ public class Enemy : MonoBehaviour {
     //消滅時の処理
     public virtual void Vanish() {
         Play_Vanish_Effect();
+        Put_Out_Item();
         if (is_Pooled) {
             gameObject.SetActive(false);
             return;
@@ -55,6 +60,16 @@ public class Enemy : MonoBehaviour {
         Destroy(effect, 1.5f);
     }
 
+
+    //アイテムの放出
+    private void Put_Out_Item() {
+        gameObject.AddComponent<PutOutSmallItems>().Put_Out_Item(power_Value, score_Value);
+        //TODO:回復アイテムのドロップ
+        Debug.Log("TODO: Drop_Life");
+        if (Random.Range(1, 100) <= drop_Life_Probability) {
+
+        }
+    }
 
     //点滅
     private IEnumerator Blink() {

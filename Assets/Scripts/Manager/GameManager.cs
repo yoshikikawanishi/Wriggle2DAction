@@ -11,14 +11,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
         //TODO:エフェクト
         GameObject player = GameObject.FindWithTag("PlayerTag");
         player.SetActive(false);
-        //ゲームオーバー
-        PlayerManager.Instance.Reduce_Stock();
-        if (PlayerManager.Instance.Get_Stock() == -1) {
-            Game_Over();
-            return;
-        }
         //復活
-        StartCoroutine("Revive");
+        PlayerManager.Instance.Reduce_Stock();
+        if (PlayerManager.Instance.Get_Stock() != 0) {                        
+            StartCoroutine("Revive");
+        }
     }
 
 
@@ -29,6 +26,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
         if (!PlayerPrefs.HasKey("SCENE")) 
             DataManager.Instance.Initialize_Player_Data();
         
+        //セーブデータの取得
         string scene = PlayerPrefs.GetString("SCENE");
         float pos_X = PlayerPrefs.GetFloat("POS_X");
         float pos_Y = PlayerPrefs.GetFloat("POS_Y");        
@@ -36,9 +34,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
         SceneManager.LoadScene(scene);
         yield return null;    
 
+        //自機の調整
         GameObject player = GameObject.FindWithTag("PlayerTag");
         if (player == null) { Debug.Log("Can't Find Player"); yield break; }        
-        player.transform.position = new Vector3(pos_X, pos_Y);        
+        player.transform.position = new Vector3(pos_X, pos_Y);
+
+        //ステータスの調整
+        PlayerManager.Instance.Set_Life(3);
 
         //エフェクト
         Play_Revive_Effect(player);

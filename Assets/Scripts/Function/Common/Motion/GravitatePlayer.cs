@@ -16,6 +16,8 @@ public class GravitatePlayer : MonoBehaviour {
 
     //吸い付き始める距離
     [SerializeField] private float DISTANCE_BORDER = 60f;
+    //吸い付きの強さ
+    [SerializeField] private float GRAVITATE_POWER = 250f;
 
     //コンポーネント
     private Rigidbody2D _rigid;
@@ -34,7 +36,7 @@ public class GravitatePlayer : MonoBehaviour {
             angle = player.transform.position - transform.position;
             distance = Mathf.Sqrt(angle.x * angle.x + angle.y * angle.y);
             if (distance < DISTANCE_BORDER) {
-                _rigid.velocity = angle.normalized * 300f;
+                _rigid.velocity = angle.normalized * GRAVITATE_POWER;
             }
         }
     }

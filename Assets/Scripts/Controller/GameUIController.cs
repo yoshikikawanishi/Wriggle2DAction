@@ -9,21 +9,25 @@ public class GameUIController : MonoBehaviour {
     [SerializeField] private Text power_Text;
     [SerializeField] private Text stock_Text;
     [SerializeField] private GameObject life_Images_Parent;
+    [SerializeField] private Slider beetle_Power_Slider;
 
     private GameObject[] life_Images = new GameObject[9];
 
     private PlayerManager player_Manager;
+    private BeetlePowerManager beetle_Power_Manager;
 
     private int score_Text_Value;
     private int power_Text_Value;
     private int stock_Text_Value;
     private int life_Image_Number;
+    private int beetle_Power_Slider_Value;
 
 
 	// Use this for initialization
 	void Start () {
         //取得
         player_Manager = PlayerManager.Instance;
+        beetle_Power_Manager = BeetlePowerManager.Instance;
         for (int i = 0; i < 9; i++) {
             life_Images[i] = life_Images_Parent.transform.GetChild(i).gameObject;
         }
@@ -31,8 +35,9 @@ public class GameUIController : MonoBehaviour {
         //UI初期値
         Change_Player_UI(score_Text, 6, player_Manager.Get_Score(), score_Text_Value); //スコア
         Change_Player_UI(power_Text, 3, player_Manager.Get_Power(), power_Text_Value); //パワー
-        Change_Player_UI(stock_Text, 1, player_Manager.Get_Stock(), stock_Text_Value); //ストック
-        Change_Life_UI();   //ライフ
+        Change_Stock_UI();          //ストック
+        Change_Life_UI();           //ライフ
+        Change_Beetle_Power_UI();   //カブトムシパワー
     }
 	
 
@@ -40,9 +45,10 @@ public class GameUIController : MonoBehaviour {
 	void Update () {
         Change_Player_UI(score_Text, 6, player_Manager.Get_Score(), score_Text_Value); //スコア
         Change_Player_UI(power_Text, 3, player_Manager.Get_Power(), power_Text_Value); //パワー
-        Change_Stock_UI();  //ストック
-        Change_Life_UI();   //ライフ
-	}
+        Change_Stock_UI();          //ストック
+        Change_Life_UI();           //ライフ
+        Change_Beetle_Power_UI();   //カブトムシパワー
+    }
 
 
     //テキストUIの変更
@@ -73,6 +79,15 @@ public class GameUIController : MonoBehaviour {
         }
         for(int i = life_Image_Number; i < 9; i++) {
             life_Images[i].SetActive(false);
+        }
+    }
+
+
+    //カブトムシパワーUI変更
+    private void Change_Beetle_Power_UI() {
+        if(beetle_Power_Slider_Value != beetle_Power_Manager.Get_Beetle_Power()) {
+            beetle_Power_Slider_Value = beetle_Power_Manager.Get_Beetle_Power();
+            beetle_Power_Slider.value = beetle_Power_Slider_Value;
         }
     }
 

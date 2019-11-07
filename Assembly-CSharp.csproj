@@ -131,7 +131,6 @@
     <Compile Include="Assets\Scripts\Controller\Player\Controlle\PlayerTransition.cs" />
     <Compile Include="Assets\Scripts\Controller\Player\Controlle\PlayerTransitionRidingBeetle.cs" />
     <Compile Include="Assets\Scripts\Function\Common\AngleCalculater.cs" />
-    <Compile Include="Assets\Scripts\Function\Common\Blink.cs" />
     <Compile Include="Assets\Scripts\Function\Common\Motion\GravitatePlayer.cs" />
     <Compile Include="Assets\Scripts\Function\Common\Motion\MoveTwoPoints.cs" />
     <Compile Include="Assets\Scripts\Function\Common\Motion\RotateMotion.cs" />
@@ -139,8 +138,8 @@
     <Compile Include="Assets\Scripts\Function\Common\Motion\VerticalMotion.cs" />
     <Compile Include="Assets\Scripts\Function\Common\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\Function\Common\PixelObjectBase.cs" />
+    <Compile Include="Assets\Scripts\Function\Common\PutOutSmallItems.cs" />
     <Compile Include="Assets\Scripts\Function\Common\SceneChangeTrigger.cs" />
-    <Compile Include="Assets\Scripts\Function\Common\ScreenFrameGenerator.cs" />
     <Compile Include="Assets\Scripts\Function\Common\ShootFunction\Bullet.cs" />
     <Compile Include="Assets\Scripts\Function\Common\ShootFunction\BulletAccelerator.cs" />
     <Compile Include="Assets\Scripts\Function\Common\ShootFunction\EnemyBullet.cs" />

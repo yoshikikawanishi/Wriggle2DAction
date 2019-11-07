@@ -7,7 +7,7 @@ public class PlayerGrazeCollision : MonoBehaviour {
     //OnTriggerStay
     private void OnTriggerStay2D(Collider2D collision) {
         if(collision.tag == "EnemyBulletTag") {            
-            BeetlePowerManager.Instance.Increase_In_Update(30);
+            BeetlePowerManager.Instance.Increase_In_Update(60);
         }
     }
 

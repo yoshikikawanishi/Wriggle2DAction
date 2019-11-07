@@ -46,7 +46,7 @@ public class ItemController : MonoBehaviour {
 
     //点取得時
     private void Gain_Score_Item() {
-        PlayerManager.Instance.Add_Score();
+        PlayerManager.Instance.Add_Score(100);
     }
 
     //カブトムシパワー取得時
