@@ -34,6 +34,15 @@ public class PlayerAttackCollision : MonoBehaviour {
     }
 
     public void Play_Animation() {
-        GetComponent<Animator>().SetTrigger("AttackTrigger");
+        int power = PlayerManager.Instance.Get_Power();
+        if (power < 32) {
+            GetComponent<Animator>().SetTrigger("AttackTrigger");
+        }
+        else if (power < 64) {
+            GetComponent<Animator>().SetTrigger("AttackTrigger2");
+        }
+        else {
+            GetComponent<Animator>().SetTrigger("AttackTrigger3");
+        }
     }
 }

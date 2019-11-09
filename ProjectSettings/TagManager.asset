@@ -10,7 +10,6 @@ TagManager:
   - PlayerFootTag
   - PlayerAttackTag
   - PlayerBulletTag
-  - PlayerKickTag
   - EnemyTag
   - EnemyBulletTag
   - ScreenWallTag

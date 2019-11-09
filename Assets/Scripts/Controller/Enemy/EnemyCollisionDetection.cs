@@ -9,8 +9,7 @@ using UnityEngine;
 public class EnemyCollisionDetection : MonoBehaviour {
 
     private Dictionary<string, int> damaged_Tag_Dictionary = new Dictionary<string, int>() {
-        {"PlayerAttackTag"  , 5 },
-        {"PlayerKickTag"    , 10},
+        {"PlayerAttackTag"  , 10 },
         {"PlayerBulletTag"  , 1 },
         {"PlayerChargeBulletTag"  , 10},
         {"PlayerTag"        , 10},
@@ -29,7 +28,8 @@ public class EnemyCollisionDetection : MonoBehaviour {
         //被弾の判定
         foreach (string key in damaged_Tag_Dictionary.Keys) {
             if (collision.tag == key) {
-                enemy.Damaged(damaged_Tag_Dictionary[key]);
+                int damage = (int)(damaged_Tag_Dictionary[key] * Damage_Rate());
+                enemy.Damaged(damage);
             }
         }
     }
@@ -49,12 +49,30 @@ public class EnemyCollisionDetection : MonoBehaviour {
     protected virtual void Change_Damaged_Tag_Dictionary() {
         damaged_Tag_Dictionary.Clear();
         damaged_Tag_Dictionary = new Dictionary<string, int>() {
-            {"PlayerAttackTag"  , 5 },
-            {"PlayerKickTag"    , 10},
+            {"PlayerAttackTag"  , 10 },
             {"PlayerBulletTag"  , 1 },
             {"PlayerChargeBulletTag"  , 10},
             {"PlayerTag"        , 10},
         };
+    }
+
+
+    //自機のパワーに応じてダメージ増加
+    private float Damage_Rate() {
+        int power = PlayerManager.Instance.Get_Power();
+        if(power < 16) {
+            return 1;
+        }
+        if(power < 32) {
+            return 1.2f;
+        }
+        else if(power < 64) {
+            return 1.5f;
+        }
+        else if(power < 128) {
+            return 1.8f;
+        }
+        return 2;
     }
 
 }

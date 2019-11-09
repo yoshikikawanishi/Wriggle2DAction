@@ -25,10 +25,23 @@ public class PlayerKickCollision : MonoBehaviour {
 
     public void Make_Collider_Appear() {
         GetComponent<CircleCollider2D>().enabled = true;
+        Play_Animation();
     }
 
     public void Make_Collider_Disappear() {
         GetComponent<CircleCollider2D>().enabled = false;
+    }
+
+
+    private void Play_Animation() {
+        GetComponent<Animator>().SetTrigger("KickTrigger");
+        int power = PlayerManager.Instance.Get_Power();        
+        if (power >= 64) {
+            transform.GetChild(0).GetComponent<Animator>().SetTrigger("KickTrigger2");            
+        }
+        else if (power >= 32) {
+            transform.GetChild(0).GetComponent<Animator>().SetTrigger("KickTrigger1");
+        }
     }
 
 }

@@ -8,8 +8,7 @@ public class CrashBlockController : MonoBehaviour {
     private List<string> destroyer_Tag_List = new List<string> {
         "PlayerBulletTag",
         "PlayerChargeBulletTag",
-        "PlayerAttackTag",
-        "PlayerKickTag"
+        "PlayerAttackTag"
     };
 
 
