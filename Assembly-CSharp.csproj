@@ -108,6 +108,7 @@
     <Compile Include="Assets\Assets\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
     <Compile Include="Assets\Scripts\Controller\CameraController.cs" />
     <Compile Include="Assets\Scripts\Controller\Enemy\Common\GreenFairy.cs" />
+    <Compile Include="Assets\Scripts\Controller\Enemy\Common\GreenYinBall.cs" />
     <Compile Include="Assets\Scripts\Controller\Enemy\Common\RedFairy.cs" />
     <Compile Include="Assets\Scripts\Controller\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Controller\Enemy\EnemyCollisionDetection.cs" />

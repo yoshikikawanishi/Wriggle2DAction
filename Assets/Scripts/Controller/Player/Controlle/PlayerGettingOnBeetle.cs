@@ -13,7 +13,7 @@ public class PlayerGettingOnBeetle : MonoBehaviour {
     private PlayerController _controller;
     private PlayerBodyCollision body_Collision;
 
-    private bool can_Get_On_Beetle = true;
+    public bool can_Get_On_Beetle = true;
 
     private float default_Gravity;
     private Vector2 default_Collider_Size;

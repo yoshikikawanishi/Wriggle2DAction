@@ -80,6 +80,7 @@ public class PlayerAttack : MonoBehaviour {
 
         kick_Collision.Make_Collider_Appear();
         for (float t = 0; t < 0.33f; t += Time.deltaTime) {
+            _rigid.velocity = new Vector2(transform.localScale.x * 180f, _rigid.velocity.y);
             //敵と衝突時ノックバック
             if (kick_Collision.Hit_Trigger()) {                
                 _rigid.velocity = new Vector2(40f * -transform.localScale.x, 180f);

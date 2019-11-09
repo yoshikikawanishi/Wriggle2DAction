@@ -6,6 +6,7 @@ using UnityEngine;
 /// 敵の体力を管理
 /// 敵の被弾時、消滅時の処理を行う、継承で処理変更
 /// </summary>
+[RequireComponent(typeof(EnemyCollisionDetection))]
 public class Enemy : MonoBehaviour {
     
     [SerializeField] private bool is_Pooled = false;    
@@ -15,6 +16,7 @@ public class Enemy : MonoBehaviour {
     [SerializeField] private float drop_Life_Probability = 1;
 
     private SpriteRenderer _sprite;
+    private Color default_Color;
 
     private bool is_Exist = true;
 
@@ -22,8 +24,8 @@ public class Enemy : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //取得
-        _sprite = GetComponent<SpriteRenderer>();        
-
+        _sprite = GetComponent<SpriteRenderer>();
+        default_Color = _sprite.color;
 	}
 
 
@@ -73,7 +75,6 @@ public class Enemy : MonoBehaviour {
 
     //点滅
     private IEnumerator Blink() {
-        Color default_Color = _sprite.color;
         _sprite.color = new Color(1, 0.5f, 0.5f);
         yield return new WaitForSeconds(0.1f);
         //色が点滅中に変わっていないことを確認

@@ -5,8 +5,8 @@ using UnityEngine;
 public class ShootFunction : MonoBehaviour {
 
     //フィールド
-    public ObjectPool bullet_Pool;  //弾
-    public Transform parent_Obj;   //弾の親オブジェクト
+    private ObjectPool bullet_Pool; //弾
+    private Transform parent_Obj;   //弾の親オブジェクト
 
 
     //弾のセット
