@@ -11,6 +11,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
         //TODO:エフェクト
         GameObject player = GameObject.FindWithTag("PlayerTag");
         player.SetActive(false);
+        //ステータスの調整
+        BeetlePowerManager.Instance.Set_Beetle_Power(0);
         //復活
         PlayerManager.Instance.Reduce_Stock();
         if (PlayerManager.Instance.Get_Stock() != 0) {                        
@@ -41,6 +43,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 
         //ステータスの調整
         PlayerManager.Instance.Set_Life(3);
+        BeetlePowerManager.Instance.StartCoroutine("Increase_Cor", 50);
 
         //エフェクト
         Play_Revive_Effect(player);
@@ -48,9 +51,17 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 
 
     //ゲームオーバー時の処理
-    public void Game_Over() {
-        Debug.Log("Game_Over");
-    }    
+    public void Game_Over() {        
+        StartCoroutine("Game_Over_Cor");        
+    }  
+    
+    private IEnumerator Game_Over_Cor() {        
+        yield return new WaitForSeconds(1.0f);
+        //シーン遷移
+        SceneManager.LoadScene("GameOverScene");
+        //セーブデータの変更
+        DataManager.Instance.Change_Data_In_Game_Over();
+    }
 
 
     //復活時のエフェクト

@@ -37,13 +37,13 @@ public class PlayerAttack : MonoBehaviour {
         can_Attack = false;       
         _anim.SetTrigger("AttackTrigger");
 
-        attack_Collision.Make_Collider_Appear();
+        attack_Collision.Make_Collider_Appear(0.18f);
         _rigid.velocity += new Vector2(transform.localScale.x * 5f, 0); //Rigidbodyのスリープ状態を解除する
         for (float t = 0; t < 0.18f; t += Time.deltaTime) {
             //敵と衝突時ノックバック
             if (attack_Collision.Hit_Trigger()) {
                 Occur_Knock_Back();
-                BeetlePowerManager.Instance.StartCoroutine("Increase_Cor", 10);
+                BeetlePowerManager.Instance.StartCoroutine("Increase_Cor", 8);
                 //ヒットストップ
                 Time.timeScale = 0.5f;
                 yield return new WaitForSeconds(0.05f);
@@ -52,14 +52,14 @@ public class PlayerAttack : MonoBehaviour {
             }
             yield return null;
         }
-        attack_Collision.Make_Collider_Disappear();
 
+        yield return new WaitForSeconds(0.17f);
         can_Attack = true;
     }
 
     //ノックバック
     private void Occur_Knock_Back() {
-        float force = _controller.is_Landing ? 200f : 50f;
+        float force = _controller.is_Landing ? 170f : 40f;
         _rigid.velocity = new Vector2(force * -transform.localScale.x, 20f);
     }
 
@@ -84,7 +84,7 @@ public class PlayerAttack : MonoBehaviour {
             //敵と衝突時ノックバック
             if (kick_Collision.Hit_Trigger()) {                
                 _rigid.velocity = new Vector2(40f * -transform.localScale.x, 180f);
-                BeetlePowerManager.Instance.StartCoroutine("Increase_Cor", 15);
+                BeetlePowerManager.Instance.StartCoroutine("Increase_Cor", 8);
                 _controller.Change_Animation("JumpBool");
                 yield return new WaitForSeconds(0.15f);
                 break;

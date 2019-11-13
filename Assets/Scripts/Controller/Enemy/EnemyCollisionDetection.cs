@@ -5,31 +5,29 @@ using UnityEngine;
 /// <summary>
 /// 敵の被弾判定を取るクラス
 /// </summary>
-[RequireComponent(typeof(Enemy))]
 public class EnemyCollisionDetection : MonoBehaviour {
 
-    private Dictionary<string, int> damaged_Tag_Dictionary = new Dictionary<string, int>() {
+    protected Dictionary<string, int> damaged_Tag_Dictionary = new Dictionary<string, int>() {
         {"PlayerAttackTag"  , 10 },
         {"PlayerBulletTag"  , 1 },
         {"PlayerChargeBulletTag"  , 10},
         {"PlayerTag"        , 10},
     };
 
-    private Enemy enemy;
+    private Enemy _enemy;
 
-
-    // Use this for initialization
-    void Start() {
-        enemy = GetComponent<Enemy>();
+    
+    void Awake() {
+        _enemy = GetComponent<Enemy>();
     }
+
 
     //OnTriggerEnter
     private void OnTriggerEnter2D(Collider2D collision) {
         //被弾の判定
         foreach (string key in damaged_Tag_Dictionary.Keys) {
             if (collision.tag == key) {
-                int damage = (int)(damaged_Tag_Dictionary[key] * Damage_Rate());
-                enemy.Damaged(damage);
+                Damaged(key);
             }
         }
     }
@@ -39,9 +37,16 @@ public class EnemyCollisionDetection : MonoBehaviour {
         //被弾の判定
         foreach (string key in damaged_Tag_Dictionary.Keys) {
             if (collision.gameObject.tag == key) {
-                enemy.Damaged(damaged_Tag_Dictionary[key]);
+                Damaged(key);
             }
         }
+    }
+
+
+    //被弾の処理
+    protected virtual void Damaged(string key) {
+        int damage = (int)(damaged_Tag_Dictionary[key] * Damage_Rate());
+        _enemy.Damaged(damage);
     }
 
 
@@ -58,7 +63,7 @@ public class EnemyCollisionDetection : MonoBehaviour {
 
 
     //自機のパワーに応じてダメージ増加
-    private float Damage_Rate() {
+    protected float Damage_Rate() {
         int power = PlayerManager.Instance.Get_Power();
         if(power < 16) {
             return 1;
@@ -70,9 +75,9 @@ public class EnemyCollisionDetection : MonoBehaviour {
             return 1.5f;
         }
         else if(power < 128) {
-            return 1.8f;
+            return 1.7f;
         }
-        return 2;
+        return 1.9f;
     }
 
 }

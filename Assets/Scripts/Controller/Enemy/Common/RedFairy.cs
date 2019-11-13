@@ -9,6 +9,8 @@ public class RedFairy : MonoBehaviour {
     private Renderer _renderer;
 
     private bool start_Action = false;
+
+    private int direction = -1;
     
 
 	// Use this for initialization
@@ -21,8 +23,7 @@ public class RedFairy : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         //歩く
-        if (start_Action && Mathf.Abs(_rigid.velocity.x) < 5f) {
-            int direction = -transform.localScale.x.CompareTo(0);
+        if (start_Action) {
             _rigid.velocity = new Vector2(direction * 40, _rigid.velocity.y);
         }
         //落下時消す
@@ -36,7 +37,7 @@ public class RedFairy : MonoBehaviour {
         //反転
         if(collision.tag == "InvisibleWallTag") {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
-            _rigid.velocity = new Vector2(_rigid.velocity.x * -1, _rigid.velocity.y);
+            direction *= -1;
         }
     }
 

@@ -33,7 +33,7 @@ public class GameUIController : MonoBehaviour {
         }
 
         //UI初期値
-        Change_Player_UI(score_Text, 6, player_Manager.Get_Score(), score_Text_Value); //スコア
+        Change_Player_UI(score_Text, 9, player_Manager.Get_Score(), score_Text_Value); //スコア
         Change_Player_UI(power_Text, 3, player_Manager.Get_Power(), power_Text_Value); //パワー
         Change_Stock_UI();          //ストック
         Change_Life_UI();           //ライフ
@@ -43,7 +43,7 @@ public class GameUIController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        Change_Player_UI(score_Text, 6, player_Manager.Get_Score(), score_Text_Value); //スコア
+        Change_Player_UI(score_Text, 9, player_Manager.Get_Score(), score_Text_Value); //スコア
         Change_Player_UI(power_Text, 3, player_Manager.Get_Power(), power_Text_Value); //パワー
         Change_Stock_UI();          //ストック
         Change_Life_UI();           //ライフ

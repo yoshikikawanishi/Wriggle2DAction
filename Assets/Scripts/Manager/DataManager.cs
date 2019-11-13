@@ -37,7 +37,7 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
         StartCoroutine("Load_Player_Data_Cor");
     }
 
-    private IEnumerator Load__Player_Data_Cor() {
+    private IEnumerator Load_Player_Data_Cor() {
         //データの取得
         if (!PlayerPrefs.HasKey("SCENE")) {
             Initialize_Player_Data();
@@ -66,10 +66,18 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
     }
 
 
+    //ゲームオーバー時のデータ変更
+    public void Change_Data_In_Game_Over() {
+        PlayerPrefs.SetInt("STOCK", 2);
+        PlayerPrefs.SetInt("LIFE", 3);
+        PlayerPrefs.SetInt("SCORE", 0);
+    }
+
+
     //データの初期化
     public void Initialize_Player_Data() {        
         string scene = "Stage1_1Scene";
-        Vector2 pos = new Vector2(0, 0);
+        Vector2 pos = new Vector2(-164f, -84f);
         int life = 3;
         int stock = 3;
         int power = 0;
@@ -85,12 +93,6 @@ public class DataManager : SingletonMonoBehaviour<DataManager> {
         PlayerPrefs.SetInt("POWER", power);
         PlayerPrefs.SetInt("SCORE", score);
         PlayerPrefs.SetInt("BEETLE_POWER", beetle_Power);
-    }
-
-
-    //データの消去
-    public void Delete_Player_Data() {
-        PlayerPrefs.DeleteAll();
     }
 
 

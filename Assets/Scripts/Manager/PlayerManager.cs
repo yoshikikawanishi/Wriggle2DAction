@@ -28,11 +28,11 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager> {
 
     public int Reduce_Stock() {
         stock--;
-        if (stock == -1) {
+        if (stock == 0) {
             GameManager.Instance.Game_Over();
         }
         return stock;
-    }
+    }    
 
 
     //Add
